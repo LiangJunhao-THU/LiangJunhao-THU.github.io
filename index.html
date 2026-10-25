@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Junhao Liang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Junhao Liang is a postdoctoral researcher in the KatherLab at the Institute for Medical AI (IMAI), Heidelberg University Hospital, working on AI for science, computational pathology and computational optics.">
+  <meta property="og:title" content="Junhao Liang">
+  <meta property="og:description" content="AI for science · computational pathology · computational optics">
+  <meta property="og:image" content="img/photo.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23e48fb5'/%3E%3Cstop offset='1' stop-color='%235b4aa3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='42' font-family='Helvetica,Arial,sans-serif' font-size='28' font-weight='700' text-anchor='middle' fill='white'%3EJL%3C/text%3E%3C/svg%3E">
+  <script>
+    /* apply the saved light/dark choice before the first paint */
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- ===================== Top navigation ===================== -->
+  <nav class="topnav" id="topnav" aria-label="Sections">
+    <div class="nav-inner">
+      <a class="brand" href="#top">Junhao Liang</a>
+      <div class="nav-links">
+        <a href="#about" data-section="about">About</a>
+        <a href="#news" data-section="news">News</a>
+        <a href="#publications" data-section="publications">Publications</a>
+        <a href="#preprints" data-section="preprints">Preprints</a>
+        <a href="#services" data-section="services">Services</a>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main class="container" id="top">
+
+    <!-- ===================== Intro ===================== -->
+    <header class="intro" id="about">
+      <div class="identity">
+        <h1 class="name" id="name">Junhao Liang</h1>
+        <div class="meta">
+          <span class="pron">/ 梁君浩 /</span>
+          <span class="email-separator"></span>
+          <span>liangjunhao.thu {at} gmail {dot} com</span>
+        </div>
+        <div class="logos">
+          <a class="logo logo-email" href="mailto:liangjunhao.thu@gmail.com" title="Email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+          <a class="logo logo-scholar" href="https://scholar.google.com/citations?user=DsM5RRwAAAAJ&amp;hl=en" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar"><i class="fa-brands fa-google-scholar"></i></a>
+          <a class="logo logo-github" href="https://github.com/LiangJunhao-THU" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a class="logo logo-linkedin" href="https://www.linkedin.com/in/junhao-liang-42928a295/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a class="logo logo-x" href="https://twitter.com/Junhao_Liang" target="_blank" rel="noopener" title="X" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+
+      <div class="intro-body">
+        <div class="photo-column">
+          <div class="photo">
+            <img src="img/photo.jpg" width="600" height="600" alt="Junhao Liang" onerror="this.parentNode.classList.add('no-photo')">
+            <div class="monogram">JL</div>
+          </div>
+        </div>
+        <div class="bio">
+          <p>Hello! I'm Junhao. I am a postdoctoral researcher in the <a href="https://jnkather.github.io/" target="_blank" rel="noopener">KatherLab</a> at the <a href="https://imai-heidelberg.de/" target="_blank" rel="noopener">Institute for Medical AI (IMAI)</a>, Heidelberg University Hospital. I received my Ph.D. from Tsinghua University.</p>
+          <p>I am passionate about <b>AI for science</b>. In particular, I am interested in how AI can drive scientific discovery that genuinely expands the frontiers of what we know, generating interpretable, quantifiable and verifiable knowledge at scale, and in how such knowledge can be validated and applied in the real world, so that it keeps evolving as it is put to use.</p>
+          <p>My current research focuses on <b>computational pathology</b> and <b>computational optics</b>, which serve as ideal sandboxes for exploring these ideas within the broader landscape of AI for science. Ultimately, I hope to translate these discoveries into tangible benefits for patients and to advance our understanding of nature and of ourselves.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================== News (same as the GitHub profile README) ===================== -->
+    <section class="news-block" id="news">
+      <p class="news-title">News:</p>
+      <ul class="parent-list">
+        <li><span class="news-date">2026/09</span>: <a href="https://www.nature.com/articles/s41591-026-04609-x" target="_blank" rel="noopener">On-premise medical AI agents</a> for reliable clinical decision-making was published in <b>Nature Medicine</b>.</li>
+        <li><span class="news-date">2026/08</span>: PathPrism was selected as a <b>Featured Article</b> and the <a href="https://www.cell.com/cancer-cell/issue?pii=S1535-6108%2825%29X0009-X" target="_blank" rel="noopener"><b>Cover Story</b></a> of the August issue of <b>Cancer Cell</b>.</li>
+        <li><span class="news-date">2026/06</span>: PathPrism was featured in a <b>Cancer Cell</b> <a href="https://www.cell.com/cancer-cell/abstract/S1535-6108(26)00290-4" target="_blank" rel="noopener">Preview</a>, <i>From prediction to interpretation in computational pathology</i>.</li>
+        <li><span class="news-date">2026/06</span>: Our work on spatial biomarker discovery through interpretable semantic learning (<a href="https://www.cell.com/cancer-cell/fulltext/S1535-6108(26)00259-X" target="_blank" rel="noopener">PathPrism</a>) was published in <b>Cancer Cell</b>.</li>
+        <li><span class="news-date">2024/04</span>: Honored to win the best <a href="https://github.com/LiangJunhao-THU/nature-conference-poster/blob/main/LIANG%20poster.pdf" target="_blank" rel="noopener">poster</a> award at the ‘Advancing Health with AI’ <b>Nature Conference</b> held in Wenzhou.</li>
+        <li><span class="news-date">2024/03</span>: Our work on wide-field mesoscopy (<a href="https://www.nature.com/articles/s41566-024-01422-1" target="_blank" rel="noopener">RA-WiFi</a>) was published in <b>Nature Photonics</b>.</li>
+        <li><span class="news-date">2023/04</span>: PathFinder was <a href="https://www.nature.com/articles/s44222-023-00069-x" target="_blank" rel="noopener">Highlighted</a> in <b>Nature Reviews Bioengineering</b>.</li>
+        <li><span class="news-date">2023/04</span>: Our work on discovering new pathological markers through human-AI collaboration (<a href="https://www.nature.com/articles/s42256-023-00635-3" target="_blank" rel="noopener">PathFinder</a>) was published in <b>Nature Machine Intelligence</b>.</li>
+      </ul>
+    </section>
+
+    <!-- ===================== Publications ===================== -->
+    <section id="publications">
+      <h2>Publications</h2>
+      <p class="pub-note">* equal contribution</p>
+
+      <ul class="publications">
+
+        <!-- 1. PathPrism · Cancer Cell -->
+        <li class="pub">
+          <div class="pub-media">
+            <div class="stack" style="--n: 3">
+              <figure class="card" style="--i: 0">
+                <div class="page"><img src="img/pubs/pathprism-cover.jpg" width="1000" height="1298" alt="Cancer Cell August 2026 cover"></div>
+                <figcaption>Cover story</figcaption>
+              </figure>
+              <figure class="card" style="--i: 1">
+                <div class="page"><img src="img/pubs/pathprism.jpg" width="1000" height="1298" alt="First page of the PathPrism paper in Cancer Cell"></div>
+                <figcaption>Article</figcaption>
+              </figure>
+              <figure class="card" style="--i: 2">
+                <div class="page"><img src="img/pubs/pathprism-preview.jpg" width="1000" height="1298" alt="First page of the Cancer Cell Preview"></div>
+                <figcaption>Preview</figcaption>
+              </figure>
+            </div>
+            <p class="stack-label">Cover story · Article · Preview</p>
+          </div>
+          <div class="pub-text">
+            <p><a href="https://www.cell.com/cancer-cell/fulltext/S1535-6108(26)00259-X" target="_blank" rel="noopener" class="highlightable pub-title">Spatial Biomarker Discovery via Interpretable Semantic Learning in Histopathology</a></p>
+            <p class="authors"><span class="self-author">Junhao Liang</span>, Xiaofeng Jiang, Nic Gabriel Reitsam, Tim Lenz, Li Zhang, Marco Gustav, Zunamys Itzell Carrero, Hannah Sophie Muti<span class="authors-more" hidden>, Peter Neidlinger, Jan Clusmann, Laura Žigutytė, Vidhya Sainath, Fabian Wolf, Lisa A. Boardman, Amy J. French, Ellen L. Goode, Andrea Gsur, Stefanie Brezina, Marc J. Gunter, Robert Steinfelder, Tabitha Harrison, Ulrike Peters, Amanda I. Phipps, Philip Quirke, Nicholas P. West, Michael Hoffmeister, Hermann Brenner, Durgesh Wankhede, Jitendra Jonnagaddala, Nicholas Hawkins, Robyn L. Ward, Elena Fountzilas, Kyriaki Papadopoulou, George Fountzilas, Thierry André, Julien Taieb, Jean-François Emile, Magali Svrcek</span><span class="authors-ellipsis">, …</span>, Lingjie Kong, and Jakob Nikolas Kather <button class="text-button author-toggle" type="button" aria-expanded="false" data-more="[show all 40 authors]" data-less="[show fewer]">[show all 40 authors]</button></p>
+            <p class="venue">Cancer Cell, 2026</p>
+            <p class="tldr"><b>TLDR</b>: PathPrism turns whole-slide images into interpretable spatial biomarker spectra that describe tissue architecture. These spectra support transparent, linear modeling of prognosis, molecular alterations and treatment response, closed-loop biomarker discovery, and perturbation-driven exploration of spatial biology in silico with VirtualWSI.</p>
+            <ul class="highlights">
+              <li><a href="https://www.cell.com/cancer-cell/issue?pii=S1535-6108(25)X0009-X" target="_blank" rel="noopener">Cover Story</a> and Featured Article of the August 2026 issue of <i>Cancer Cell</i></li>
+              <li>Featured in a <i>Cancer Cell</i> Preview: <a href="https://www.cell.com/cancer-cell/abstract/S1535-6108(26)00290-4" target="_blank" rel="noopener"><i>From prediction to interpretation in computational pathology</i></a></li>
+            </ul>
+            <p class="pub-links"><a class="highlightable" href="https://www.cell.com/cancer-cell/fulltext/S1535-6108(26)00259-X" target="_blank" rel="noopener">Paper</a><span class="sep">|</span><a class="highlightable" href="https://github.com/KatherLab/PathPrism" target="_blank" rel="noopener">Code</a><span class="sep">|</span><a class="highlightable bibtex" data-key="liang2026pathprism" role="button" tabindex="0">BibTeX</a></p>
+          </div>
+        </li>
+
+        <!-- 2. PathFinder · Nature Machine Intelligence -->
+        <li class="pub">
+          <div class="pub-media">
+            <div class="stack" style="--n: 2">
+              <figure class="card" style="--i: 0">
+                <div class="page"><img src="img/pubs/pathfinder.jpg" width="1000" height="1328" alt="First page of the PathFinder paper in Nature Machine Intelligence"></div>
+                <figcaption>Article</figcaption>
+              </figure>
+              <figure class="card" style="--i: 1">
+                <div class="page"><img src="img/pubs/pathfinder-highlight.jpg" width="1000" height="1328" alt="Nature Reviews Bioengineering research highlight"></div>
+                <figcaption>Research highlight</figcaption>
+              </figure>
+            </div>
+            <p class="stack-label">Article · Research highlight</p>
+          </div>
+          <div class="pub-text">
+            <p><a href="https://www.nature.com/articles/s42256-023-00635-3" target="_blank" rel="noopener" class="highlightable pub-title">Deep Learning Supported Discovery of Biomarkers for Clinical Prognosis of Liver Cancer</a></p>
+            <p class="authors"><span class="self-author">Junhao Liang</span>, Weisheng Zhang, Jianghui Yang, Meilong Wu, Qionghai Dai, Hongfang Yin, Ying Xiao, and Lingjie Kong</p>
+            <p class="venue">Nature Machine Intelligence, 2023</p>
+            <p class="tldr"><b>TLDR</b>: Deep learning models predict survival well but are hard to trust in the clinic. PathFinder is a human-centric framework that helps pathologists discover new tissue biomarkers from well-performing models; with it we found that the spatial distribution of necrosis in liver cancer is strongly linked to prognosis, and proposed two clinically independent indicators.</p>
+            <ul class="highlights">
+              <li>Highlighted in <i>Nature Reviews Bioengineering</i>: <a href="https://www.nature.com/articles/s44222-023-00069-x" target="_blank" rel="noopener"><i>Artificial intelligence identifies new cancer biomarkers</i></a></li>
+            </ul>
+            <p class="pub-links"><a class="highlightable" href="https://www.nature.com/articles/s42256-023-00635-3" target="_blank" rel="noopener">Paper</a><span class="sep">|</span><a class="highlightable" href="https://github.com/Biooptics2021/PathFinder" target="_blank" rel="noopener">Code</a><span class="sep">|</span><a class="highlightable bibtex" data-key="liang2023pathfinder" role="button" tabindex="0">BibTeX</a></p>
+          </div>
+        </li>
+
+        <!-- 3. On-premise clinical agents · Nature Medicine -->
+        <li class="pub">
+          <div class="pub-media">
+            <div class="stack" style="--n: 2">
+              <figure class="card" style="--i: 0">
+                <div class="page"><img src="img/pubs/natmed-agents.jpg" width="742" height="986" alt="First page of the Nature Medicine paper"></div>
+                <figcaption>Article</figcaption>
+              </figure>
+              <figure class="card" style="--i: 1">
+                <div class="page"><img src="img/pubs/natmed-nv.jpg" width="1000" height="1328" alt="First page of the Nature Medicine News &amp; Views"></div>
+                <figcaption>News &amp; Views</figcaption>
+              </figure>
+            </div>
+            <p class="stack-label">Article · News &amp; Views</p>
+          </div>
+          <div class="pub-text">
+            <p><a href="https://www.nature.com/articles/s41591-026-04609-x" target="_blank" rel="noopener" class="highlightable pub-title">On-Premise Medical AI Agents for Reliable Clinical Decision-Making</a></p>
+            <p class="authors">Li Zhang, Georg Wölflein, Dyke Ferber, <span class="self-author">Junhao Liang</span>, Zunamys I. Carrero, Xuewei Wu, Julien Vibert, Jan Clusmann<span class="authors-more" hidden>, Lino Möhrmann, Elena E. Möhrmann, Catharina Wichmann, Fabian Wolf, Tim Lenz</span><span class="authors-ellipsis">, …</span>, and Jakob Nikolas Kather <button class="text-button author-toggle" type="button" aria-expanded="false" data-more="[show all 14 authors]" data-less="[show fewer]">[show all 14 authors]</button></p>
+            <p class="venue">Nature Medicine, 2026</p>
+            <p class="tldr"><b>TLDR</b>: A fully on-premise clinical LLM agent paired with a multi-perspective reliability framework. Decision-time reliability signals pick out a lower-risk subset of cases that the agent can handle on its own, and defer the rest for review.</p>
+            <ul class="highlights">
+              <li>Featured in a <i>Nature Medicine</i> News &amp; Views: <a href="https://www.nature.com/articles/s41591-026-04658-2" target="_blank" rel="noopener"><i>The missing links in agentic AI autonomy</i></a></li>
+            </ul>
+            <p class="pub-links"><a class="highlightable" href="https://www.nature.com/articles/s41591-026-04609-x" target="_blank" rel="noopener">Paper</a><span class="sep">|</span><a class="highlightable bibtex" data-key="zhang2026onpremise" role="button" tabindex="0">BibTeX</a></p>
+          </div>
+        </li>
+
+        <!-- 4. RA-WiFi · Nature Photonics -->
+        <li class="pub">
+          <div class="pub-media">
+            <div class="stack single" style="--n: 1">
+              <figure class="card" style="--i: 0">
+                <div class="page"><img src="img/pubs/rawifi.jpg" width="763" height="1013" alt="First page of the RA-WiFi paper in Nature Photonics"></div>
+                <figcaption>Article</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="pub-text">
+            <p><a href="https://www.nature.com/articles/s41566-024-01422-1" target="_blank" rel="noopener" class="highlightable pub-title">Random-Access Wide-Field Mesoscopy for Centimetre-Scale Imaging of Biodynamics with Subcellular Resolution</a></p>
+            <p class="authors">Ruheng Shi*, Xinyue Chen*, Junhao Deng*, <span class="self-author">Junhao Liang</span>, Kuikui Fan, Feifan Zhou, Peifu Tang, Licheng Zhang, and Lingjie Kong</p>
+            <p class="venue">Nature Photonics, 2024</p>
+            <p class="tldr"><b>TLDR</b>: RA-WiFi mesoscopy images in vivo biodynamics over a 163.84 mm² field of view at ~2.18 µm resolution, with random-access structured illumination for optical sectioning and multi-plane imaging of curved samples. We use it for cortex-wide calcium imaging in awake mice and imaging of mouse spinal cords in vivo.</p>
+            <ul class="highlights">
+              <li>Highlighted in <i>Laser Focus World</i>: <a href="https://www.laserfocusworld.com/biolife-sciences/article/55091731/random-access-wi-fi-mesocope-enables-flexible-in-vivo-biodynamics-imaging" target="_blank" rel="noopener"><i>Random-access Wi-Fi mesoscope enables flexible in vivo biodynamics imaging</i></a></li>
+            </ul>
+            <p class="pub-links"><a class="highlightable" href="https://www.nature.com/articles/s41566-024-01422-1" target="_blank" rel="noopener">Paper</a><span class="sep">|</span><a class="highlightable bibtex" data-key="shi2024rawifi" role="button" tabindex="0">BibTeX</a></p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== Preprints ===================== -->
+    <section id="preprints">
+      <h2>Preprints</h2>
+      <ul class="preprints">
+        <li class="preprint">
+          <p><span class="pub-title">Towards a General-Purpose Foundation Model for Signal Extraction in Calcium Imaging of Neuronal Network Activities</span></p>
+          <p class="authors">Weisheng Zhang*, <span class="self-author">Junhao Liang*</span>, and Lingjie Kong</p>
+          <p class="venue">Under minor revision at Nature Methods · Conference version at the European Conference on Biomedical Optics (ECBO), 2025 (W2C.3)</p>
+          <p class="pub-links"><a class="highlightable bibtex" data-key="zhang2025calcium" role="button" tabindex="0">BibTeX</a></p>
+        </li>
+        <li class="preprint">
+          <p><a href="https://doi.org/10.1101/2026.02.25.707931" target="_blank" rel="noopener" class="highlightable pub-title">Transforming Histology into Virtual Multiplex Immunofluorescence to Decode Prognostic Spatial Immunity in Hepatocellular Carcinoma</a></p>
+          <p class="authors">Linghan Cai*, Songhan Jiang*, <span class="self-author">Junhao Liang*</span>, Fengchun Liu*, Buyi Zhang*, Nic Gabriel Reitsam, Qinghe Zeng, Zheqi Hu<span class="authors-more" hidden>, Yanqing Ma, Ziqian Li, Shi Feng, Maotong Hu, Xiuming Zhang, Jing Zhang, Jakob Nikolas Kather, Yongbing Zhang</span><span class="authors-ellipsis">, …</span>, and Wenjie Liang <button class="text-button author-toggle" type="button" aria-expanded="false" data-more="[show all 17 authors]" data-less="[show fewer]">[show all 17 authors]</button></p>
+          <p class="venue">Under review at Science Advances · bioRxiv, 2026</p>
+          <p class="pub-links"><a class="highlightable" href="https://doi.org/10.1101/2026.02.25.707931" target="_blank" rel="noopener">bioRxiv</a><span class="sep">|</span><a class="highlightable bibtex" data-key="cai2026virtualmif" role="button" tabindex="0">BibTeX</a></p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== Services (same as the GitHub profile README) ===================== -->
+    <section id="services">
+      <h2>Services</h2>
+      <ul class="plain-list">
+        <li>Assisted in reviewing manuscripts in <i>Nature Machine Intelligence, Nature Cell Biology, Nature Communications, BMJ Digital Health, Journal of Hepatology, npj Precision Oncology, Cancer Medicine</i>.</li>
+      </ul>
+    </section>
+
+    <footer>Last updated October 2026</footer>
+  </main>
+
+  <div id="copynotice" role="status">BibTeX copied to clipboard!</div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

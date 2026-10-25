@@ -1,0 +1,930 @@
+/* =========================================================
+   Junhao Liang · personal website
+   Layout and palette adapted from zt-yang.com
+   ========================================================= */
+
+/* ---------- Theme tokens ---------- */
+
+:root {
+  --bg: #ffffff;
+  --text: #333333;
+  --heading: #222222;
+  --muted: #868c95;
+  --link: #3498db;
+  --link-hover: #f39c12;
+  --line: #eaecef;
+  --news-bg: rgba(52, 152, 219, 0.13);
+  --news-title: #e74c3c;
+  --tldr: #e67e22;
+  --page-border: #e3e6ea;
+  --page-dim: 1;
+  --nav-bg: rgba(255, 255, 255, 0.8);
+  --shadow-rest: 0 1px 2px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.07);
+  --shadow-open: 0 2px 4px rgba(15, 23, 42, 0.06), 0 10px 26px -6px rgba(15, 23, 42, 0.2);
+  --photo-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.35);
+  --logo-gh: #24292f;
+  --logo-ring: transparent;
+  --moon: 1;
+  --sun: 0;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
+  --glide: cubic-bezier(0.25, 0.9, 0.3, 1);
+  --nav-h: 56px;
+  color-scheme: light;
+}
+
+/* a critically damped (no overshoot) curve for the piles, where linear() easing is supported */
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --glide: linear(0, 0.0196, 0.0684, 0.1344, 0.2093, 0.2872, 0.3643, 0.438, 0.5068, 0.5698, 0.6268, 0.6777, 0.7228, 0.7625, 0.7971, 0.8272, 0.8532, 0.8755, 0.8947, 0.9111, 0.9251, 0.937, 0.9471, 0.9556, 0.9628, 0.9689, 0.974, 0.9783, 0.9819, 0.9849, 0.9874, 0.9895, 0.9913, 0.9928, 0.994, 0.995, 0.9959, 0.9966, 0.9972, 0.9977, 1);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0e1116;
+  --text: #cdd2d9;
+  --heading: #eef1f5;
+  --muted: #838a94;
+  --link: #5dade2;
+  --link-hover: #f5b041;
+  --line: #232830;
+  --news-bg: rgba(93, 173, 226, 0.11);
+  --news-title: #ff7a6b;
+  --tldr: #f0a35e;
+  --page-border: #2b3038;
+  --page-dim: 0.9;
+  --nav-bg: rgba(14, 17, 22, 0.78);
+  --shadow-rest: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.35);
+  --shadow-open: 0 2px 6px rgba(0, 0, 0, 0.4), 0 12px 30px -6px rgba(0, 0, 0, 0.6);
+  --photo-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.8);
+  --logo-gh: #2d333b;
+  --logo-ring: rgba(255, 255, 255, 0.14);
+  --moon: 0;
+  --sun: 1;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1116;
+    --text: #cdd2d9;
+    --heading: #eef1f5;
+    --muted: #838a94;
+    --link: #5dade2;
+    --link-hover: #f5b041;
+    --line: #232830;
+    --news-bg: rgba(93, 173, 226, 0.11);
+    --news-title: #ff7a6b;
+    --tldr: #f0a35e;
+    --page-border: #2b3038;
+    --page-dim: 0.9;
+    --nav-bg: rgba(14, 17, 22, 0.78);
+    --shadow-rest: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.35);
+    --shadow-open: 0 2px 6px rgba(0, 0, 0, 0.4), 0 12px 30px -6px rgba(0, 0, 0, 0.6);
+      --photo-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.8);
+    --logo-gh: #2d333b;
+    --logo-ring: rgba(255, 255, 255, 0.14);
+    --moon: 0;
+    --sun: 1;
+    color-scheme: dark;
+  }
+}
+
+/* circular reveal when switching themes (View Transitions API) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* soft-edged reveal: --vt-r is animated from main.js */
+html.vt-soft::view-transition-new(root) {
+  -webkit-mask-image: radial-gradient(circle at var(--vt-x) var(--vt-y), #000 calc(var(--vt-r) - var(--vt-soft)), transparent var(--vt-r));
+  mask-image: radial-gradient(circle at var(--vt-x) var(--vt-y), #000 calc(var(--vt-r) - var(--vt-soft)), transparent var(--vt-r));
+}
+
+/* ---------- Base ---------- */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: var(--link);
+}
+
+a:hover,
+.highlightable:hover {
+  color: var(--link-hover);
+  cursor: pointer;
+}
+
+ins {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  color: var(--heading);
+}
+
+h2 {
+  margin-top: 2em;
+}
+
+.container {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 28px 20px 0;
+}
+
+/* ---------- Top navigation ---------- */
+
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.topnav.scrolled {
+  border-bottom-color: var(--line);
+}
+
+.nav-inner {
+  max-width: 840px;
+  height: var(--nav-h);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand,
+.brand:visited {
+  font-weight: 600;
+  font-size: 15.5px;
+  color: var(--heading);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out), transform 0.5s var(--ease-out);
+}
+
+.brand:hover {
+  color: var(--heading);
+}
+
+.topnav.show-brand .brand {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.nav-links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-links a,
+.nav-links a:visited {
+  position: relative;
+  padding: 6px 0;
+  font-size: 14.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.45s var(--ease-ios);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--heading);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.theme-toggle {
+  position: relative;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--news-bg);
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
+}
+
+.theme-toggle svg {
+  position: absolute;
+  transition: opacity 0.35s ease, transform 0.6s var(--ease-ios);
+}
+
+.icon-moon {
+  opacity: var(--moon);
+  transform: rotate(calc((1 - var(--moon)) * -90deg)) scale(calc(0.55 + 0.45 * var(--moon)));
+}
+
+.icon-sun {
+  opacity: var(--sun);
+  transform: rotate(calc((1 - var(--sun)) * 90deg)) scale(calc(0.55 + 0.45 * var(--sun)));
+}
+
+/* ---------- Intro ---------- */
+
+.identity {
+  text-align: center;
+}
+
+.name {
+  margin: 0.45em 0 0.45rem;
+}
+
+.meta {
+  color: var(--text);
+}
+
+.pron {
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.email-separator {
+  display: inline-block;
+  width: 1.5em;
+}
+
+.logos {
+  padding-top: 18px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  border-radius: 6px;
+  color: #fff !important;
+  font-size: 17px;
+  vertical-align: middle;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+}
+
+.logo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.logo-email { background: linear-gradient(160deg, #5dade2, #2e86c1); }
+.logo-scholar { background: #4285f4; font-size: 18px; }
+.logo-github { background: var(--logo-gh); box-shadow: inset 0 0 0 1px var(--logo-ring); font-size: 19px; }
+.logo-linkedin { background: #0a66c2; font-size: 17px; }
+.logo-x { background: #000; box-shadow: inset 0 0 0 1px var(--logo-ring); font-size: 16px; }
+
+/* photo on the left, bio on the right; the photo takes the height of the bio,
+   so the top and bottom of the text line up with the photo */
+.intro-body {
+  display: flex;
+  align-items: stretch;
+  gap: 32px;
+  margin-top: 30px;
+}
+
+.photo-column {
+  flex: 0 0 36%;
+  display: flex;
+}
+
+.bio {
+  flex: 1;
+  min-width: 0;
+  text-box: trim-both cap alphabetic;
+}
+
+.bio > p:first-child {
+  margin-top: 0;
+}
+
+.bio > p:last-child {
+  margin-bottom: 0;
+}
+
+/* browsers without text-box trimming: pull the first and last lines to the photo edges */
+@supports not (text-box: trim-both cap alphabetic) {
+  .bio {
+    margin-top: -5px;
+    margin-bottom: -6px;
+  }
+}
+
+.photo {
+  position: relative;
+  flex: 1;
+  min-height: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f4f1f6;
+  box-shadow: var(--photo-shadow);
+}
+
+.photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* the photo is square and the frame is portrait, so the sides get trimmed.
+     Keep the person (from the hand on the statue, ~7.5% from the left, to the
+     elbow, ~84%) centred, but never let the hand on the left leave the frame. */
+  object-position: 20% 50%;
+  object-position: calc(-1 * clamp(0px, 45.75cqh - 50cqw, 6cqh)) 50%;
+  display: block;
+}
+
+@media screen and (min-width: 769px) {
+  .photo {
+    container-type: size;
+  }
+}
+
+.monogram {
+  display: none;
+}
+
+.photo.no-photo img {
+  display: none;
+}
+
+.photo.no-photo .monogram {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(135deg, #e48fb5 0%, #b56db7 48%, #5b4aa3 100%);
+}
+
+/* ---------- News ---------- */
+
+.news-block {
+  background-color: var(--news-bg);
+  border-radius: 8px;
+  padding: 10px;
+  padding-bottom: 6px;
+  margin-top: 32px;
+}
+
+.news-title {
+  margin: 0 0 -8pt;
+  font-weight: bold;
+  font-style: italic;
+  color: var(--news-title);
+}
+
+ul {
+  padding-left: 0;
+}
+
+.parent-list {
+  margin-top: 5px;
+  padding-left: 20px;
+}
+
+.parent-list li {
+  padding-top: 10px;
+}
+
+.news-date {
+  font-variant-numeric: tabular-nums;
+}
+
+.text-button {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.9em;
+  color: var(--link);
+  cursor: pointer;
+}
+
+.text-button:hover {
+  color: var(--link-hover);
+}
+
+/* ---------- Publications ---------- */
+
+.pub-note {
+  margin-top: -6px;
+  font-size: 0.9em;
+  color: var(--muted);
+}
+
+.publications,
+.preprints {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pub {
+  position: relative;
+  display: flex;
+  gap: 4%;
+  padding: 18px 0 30px;
+}
+
+.pub-media {
+  flex: 0 0 36%;
+  max-width: 36%;
+}
+
+.pub-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.pub-text p,
+.preprint p {
+  line-height: 1.25em;
+  margin: 8px auto;
+}
+
+.pub-title {
+  font-size: 1.17em;
+  line-height: 1.3em;
+  font-weight: 600;
+  color: var(--link);
+}
+
+.self-author {
+  font-weight: 600;
+}
+
+.venue {
+  font-style: italic;
+}
+
+.tldr {
+  color: var(--tldr);
+  font-style: italic;
+}
+
+.highlights {
+  list-style: disc;
+  margin: 8px 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.highlights li {
+  padding-top: 3px;
+}
+
+.highlights li::marker {
+  color: var(--muted);
+}
+
+.pub-links .sep {
+  color: var(--muted);
+  opacity: 0.7;
+  padding: 0 0.45em;
+}
+
+.authors-more[hidden],
+.authors-ellipsis[hidden] {
+  display: none;
+}
+
+.author-toggle {
+  margin-left: 0.3em;
+}
+
+.preprint {
+  padding: 4px 0 14px;
+}
+
+/* ---------- Paper pages ---------- */
+
+.page {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--page-border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow-rest);
+  transition: box-shadow 0.45s var(--ease-out);
+}
+
+.page img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: brightness(var(--page-dim));
+  transition: filter 0.3s ease;
+}
+
+.page:hover img {
+  filter: none;
+}
+
+/*
+ * A pile of pages. The first card sits on top and the others peek out behind it.
+ * On hover the pages slide out side by side at the same size and push the text
+ * of the row to the right; main.js moves everything with transforms only.
+ *   --n : number of cards      --i : card index (0 = top)      --shift : text offset
+ */
+.stack {
+  position: relative;
+  z-index: 2;
+}
+
+/* spacer that fixes the resting height, so opening never shifts the layout */
+.stack::after {
+  content: "";
+  display: block;
+  width: calc(100% - 20px);
+  aspect-ratio: 1 / var(--ar, 1.33);
+  margin-bottom: calc(min(var(--n, 1) - 1, 2) * 7px);
+}
+
+/* invisible hover area that grows with the spread, so gaps between pages don't close it */
+.stack-hit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 20px);
+  margin: 0;
+  z-index: calc(10 - var(--i, 0));
+  transform-origin: 50% 50%;
+}
+
+/* resting peek offsets (used before main.js takes over) */
+.card:nth-of-type(2) { transform: translate(12px, 6px) rotate(2deg); }
+.card:nth-of-type(3) { transform: translate(5px, 12px) rotate(-1.5deg); }
+
+.stack.js .card {
+  transform-origin: 0 0;
+  will-change: transform;
+  /* closing: pages slide back under the top page, back pages first */
+  transition: transform 0.38s var(--glide) calc((var(--n) - 1 - var(--i)) * 12ms);
+}
+
+.stack.js.is-open .card {
+  /* opening: the text starts moving first, the pages follow it out */
+  transition: transform 0.48s var(--glide) calc(16ms + var(--i) * 18ms);
+}
+
+.stack.is-open .page {
+  box-shadow: var(--shadow-open);
+}
+
+.stack.can-spread:not(.is-open) {
+  cursor: pointer;
+}
+
+.stack:focus {
+  outline: none;
+}
+
+.stack:focus-visible::before {
+  content: "";
+  position: absolute;
+  inset: -8px 12px -8px -8px;
+  border: 2px solid var(--link);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.card figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 9px;
+  font-size: 12.5px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.stack.is-open .card figcaption {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.3s var(--ease-out) calc(0.16s + var(--i) * 18ms),
+    transform 0.45s var(--ease-out) calc(0.16s + var(--i) * 18ms);
+}
+
+.stack-label {
+  margin: 10px 20px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-align: center;
+  transition: opacity 0.25s ease 0.2s;
+}
+
+.pub.is-open .stack-label {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+/* the text of the row: pushed right while the pages are spread */
+.pub.can-push .pub-text {
+  will-change: transform;
+  /* closing: follows the pages back */
+  transition: transform 0.4s var(--glide) 0.04s;
+}
+
+.pub.is-open .pub-text {
+  transform: translateX(var(--shift, 0px));
+  transition: transform 0.44s var(--glide);
+}
+
+/* soft fade where the pushed text leaves the column */
+.pub-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -28px;
+  width: 96px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--bg) 70%);
+  opacity: 0;
+  transition: opacity 0.25s ease 0.18s;
+}
+
+.pub.is-open .pub-edge {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.no-anim,
+.no-anim .card,
+.no-anim .page,
+.no-anim .pub-text,
+.no-anim .pub-edge,
+.no-anim figcaption,
+.no-anim .stack-label {
+  transition: none !important;
+}
+
+/* ---------- Other sections ---------- */
+
+.plain-list {
+  padding-left: 20px;
+}
+
+.plain-list li {
+  padding-top: 6px;
+}
+
+footer {
+  margin-top: 3em;
+  padding: 1em 0 2.5em;
+  border-top: 1px solid var(--line);
+  font-size: 0.85em;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------- BibTeX notice ---------- */
+
+#copynotice {
+  position: fixed;
+  bottom: 9%;
+  left: 50%;
+  z-index: 70;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #2e7d32;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translate(-50%, 10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.45s var(--ease-out);
+}
+
+#copynotice.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Wide screens: clip the pushed text at the column edge ---------- */
+
+@media screen and (min-width: 769px) {
+  .publications {
+    margin-inline: -28px;      /* room for page shadows at the column edges */
+    padding-inline: 28px;
+    overflow-x: clip;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .stack.js .card,
+  .stack.js.is-open .card,
+  .pub.can-push .pub-text,
+  .pub.is-open .pub-text,
+  .card figcaption,
+  .stack.is-open .card figcaption {
+    transition-duration: 1ms !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* ---------- Phones ---------- */
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 20px 20px 0;
+  }
+
+  .nav-inner {
+    gap: 10px;
+    padding: 0 12px 0 8px;
+  }
+
+  .brand {
+    display: none;
+  }
+
+  .nav-links {
+    flex: 1;
+    min-width: 0;
+    margin-left: 0;
+    gap: 18px;
+    padding: 0 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12px, #000 calc(100% - 18px), transparent);
+    mask-image: linear-gradient(90deg, transparent 0, #000 12px, #000 calc(100% - 18px), transparent);
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .email-separator {
+    display: block;
+    height: 0.5em;
+  }
+
+  .intro-body {
+    display: block;
+    margin-top: 24px;
+  }
+
+  .photo-column {
+    width: 62%;
+    margin: 0 auto 22px;
+  }
+
+  .photo {
+    aspect-ratio: 1 / 1;
+    min-height: 0;
+  }
+
+  .photo img {
+    object-position: 50% 50%;
+  }
+
+  .bio {
+    margin: 0;
+  }
+
+  .pub {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pub-media {
+    max-width: none;
+  }
+
+  /* pages become a swipeable row */
+  .stack {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 2px 2px 26px;
+    scrollbar-width: none;
+  }
+
+  .stack::-webkit-scrollbar {
+    display: none;
+  }
+
+  .stack::after,
+  .stack-label,
+  .stack-hit,
+  .pub-edge {
+    display: none;
+  }
+
+  .card,
+  .card:nth-of-type(2),
+  .card:nth-of-type(3) {
+    position: relative;
+    flex: 0 0 64%;
+    width: 64% !important;
+    transform: none !important;
+    scroll-snap-align: start;
+  }
+
+  .card figcaption {
+    opacity: 1;
+    transform: none;
+  }
+}
