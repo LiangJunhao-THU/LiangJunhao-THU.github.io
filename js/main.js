@@ -138,7 +138,6 @@ document.querySelectorAll('.author-toggle').forEach((btn) => {
    ========================================================= */
 
 const themeToggle = document.getElementById('theme-toggle');
-const themeMeta = document.querySelector('meta[name="theme-color"]');
 const currentTheme = () => root.getAttribute('data-theme') || (darkMQ.matches ? 'dark' : 'light');
 const THEME_EASE = 'cubic-bezier(0.45, 0.05, 0.25, 1)';
 
@@ -153,12 +152,13 @@ if (window.CSS && CSS.registerProperty) {
   }
 }
 
+let fadeTimer;
+
 function syncThemeUI() {
   const dark = currentTheme() === 'dark';
   const label = dark ? 'Switch to light mode' : 'Switch to dark mode';
   themeToggle.setAttribute('aria-label', label);
   themeToggle.title = label;
-  if (themeMeta) themeMeta.setAttribute('content', dark ? '#0e1116' : '#ffffff');
 }
 
 themeToggle.addEventListener('click', () => {
@@ -168,7 +168,16 @@ themeToggle.addEventListener('click', () => {
     try { localStorage.setItem('theme', next); } catch (e) { /* storage unavailable */ }
     syncThemeUI();
   };
-  if (!document.startViewTransition || reduceMQ.matches) { apply(); return; }
+  // phones and tablets get a plain colour cross-fade: mobile browsers handle the
+  // page snapshots behind the radial reveal unreliably, which shows up as a flash
+  const touch = lastPointer === 'touch' || lastPointer === 'pen' || noHoverMQ.matches;
+  if (touch || !document.startViewTransition || reduceMQ.matches) {
+    root.classList.add('theme-fading');
+    apply();
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => root.classList.remove('theme-fading'), 700);
+    return;
+  }
 
   const r = themeToggle.getBoundingClientRect();
   const x = r.left + r.width / 2;

@@ -102,6 +102,47 @@
   z-index: 2;
 }
 
+/* phones and tablets: the theme switches with a plain colour fade.
+   The colour tokens are registered so that they can be animated once, on the
+   root element; everything that uses them follows in lockstep. */
+@property --bg { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+@property --text { syntax: '<color>'; inherits: true; initial-value: #333333; }
+@property --heading { syntax: '<color>'; inherits: true; initial-value: #222222; }
+@property --muted { syntax: '<color>'; inherits: true; initial-value: #868c95; }
+@property --link { syntax: '<color>'; inherits: true; initial-value: #3498db; }
+@property --link-hover { syntax: '<color>'; inherits: true; initial-value: #f39c12; }
+@property --line { syntax: '<color>'; inherits: true; initial-value: #eaecef; }
+@property --news-bg { syntax: '<color>'; inherits: true; initial-value: rgba(52, 152, 219, 0.13); }
+@property --news-title { syntax: '<color>'; inherits: true; initial-value: #e74c3c; }
+@property --tldr { syntax: '<color>'; inherits: true; initial-value: #e67e22; }
+@property --page-border { syntax: '<color>'; inherits: true; initial-value: #e3e6ea; }
+@property --nav-bg { syntax: '<color>'; inherits: true; initial-value: rgba(255, 255, 255, 0.8); }
+@property --logo-gh { syntax: '<color>'; inherits: true; initial-value: #24292f; }
+@property --logo-ring { syntax: '<color>'; inherits: true; initial-value: transparent; }
+
+html.theme-fading {
+  transition:
+    --bg 0.6s ease,
+    --text 0.6s ease,
+    --heading 0.6s ease,
+    --muted 0.6s ease,
+    --link 0.6s ease,
+    --link-hover 0.6s ease,
+    --line 0.6s ease,
+    --news-bg 0.6s ease,
+    --news-title 0.6s ease,
+    --tldr 0.6s ease,
+    --page-border 0.6s ease,
+    --nav-bg 0.6s ease,
+    --logo-gh 0.6s ease,
+    --logo-ring 0.6s ease;
+}
+
+html.theme-fading .photo,
+html.theme-fading .page {
+  transition: box-shadow 0.6s ease;
+}
+
 /* soft-edged reveal: --vt-r is animated from main.js */
 html.vt-soft::view-transition-new(root) {
   -webkit-mask-image: radial-gradient(circle at var(--vt-x) var(--vt-y), #000 calc(var(--vt-r) - var(--vt-soft)), transparent var(--vt-r));
@@ -309,6 +350,11 @@ h2 {
   letter-spacing: 0.08em;
 }
 
+.ipa {
+  margin-left: 0.7em;
+  letter-spacing: 0.01em;
+}
+
 .email-separator {
   display: inline-block;
   width: 1.5em;
@@ -343,27 +389,19 @@ h2 {
 .logo-linkedin { background: #0a66c2; font-size: 17px; }
 .logo-x { background: #000; box-shadow: inset 0 0 0 1px var(--logo-ring); font-size: 16px; }
 
-/* photo on the left, bio on the right; the photo takes the height of the bio,
-   so the top and bottom of the text line up with the photo */
+/* photo floated on the left; the bio wraps around it and continues underneath */
 .intro-body {
-  display: flex;
-  align-items: stretch;
-  gap: 32px;
   margin-top: 30px;
-}
-
-.photo-column {
-  flex: 0 0 36%;
-  display: flex;
-}
-
-.bio {
-  flex: 1;
-  min-width: 0;
   text-box: trim-both cap alphabetic;
 }
 
-.bio > p:first-child {
+.intro-body::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.bio > p:first-of-type {
   margin-top: 0;
 }
 
@@ -371,22 +409,23 @@ h2 {
   margin-bottom: 0;
 }
 
-/* browsers without text-box trimming: pull the first and last lines to the photo edges */
-@supports not (text-box: trim-both cap alphabetic) {
-  .bio {
-    margin-top: -5px;
-    margin-bottom: -6px;
-  }
-}
-
 .photo {
   position: relative;
-  flex: 1;
-  min-height: 240px;
+  float: left;
+  width: 196px;
+  aspect-ratio: 4 / 5;
+  margin: 0 26px 12px 0;
   border-radius: 10px;
   overflow: hidden;
   background: #f4f1f6;
   box-shadow: var(--photo-shadow);
+}
+
+/* browsers without text-box trimming: line the photo up with the first line's capitals */
+@supports not (text-box: trim-both cap alphabetic) {
+  .photo {
+    margin-top: 5px;
+  }
 }
 
 .photo img {
@@ -395,18 +434,10 @@ h2 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* the photo is square and the frame is portrait, so the sides get trimmed.
-     Keep the person (from the hand on the statue, ~7.5% from the left, to the
-     elbow, ~84%) centred, but never let the hand on the left leave the frame. */
-  object-position: 20% 50%;
-  object-position: calc(-1 * clamp(0px, 45.75cqh - 50cqw, 6cqh)) 50%;
+  /* the photo is square and the frame 4:5, so the sides are trimmed;
+     this keeps the hand on the statue and the elbow both in the frame */
+  object-position: 28.75% 50%;
   display: block;
-}
-
-@media screen and (min-width: 769px) {
-  .photo {
-    container-type: size;
-  }
 }
 
 .monogram {
@@ -861,26 +892,13 @@ footer {
   }
 
   .intro-body {
-    display: block;
     margin-top: 24px;
   }
 
-  .photo-column {
-    width: 62%;
-    margin: 0 auto 22px;
-  }
-
   .photo {
-    aspect-ratio: 1 / 1;
-    min-height: 0;
-  }
-
-  .photo img {
-    object-position: 50% 50%;
-  }
-
-  .bio {
-    margin: 0;
+    width: 40%;
+    max-width: 156px;
+    margin: 0 16px 8px 0;
   }
 
   .pub {
